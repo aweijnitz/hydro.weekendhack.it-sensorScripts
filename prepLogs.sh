@@ -1,8 +1,11 @@
 #!/bin/bash
 
+# This is needed to make things work in non-interactive shells
+SCRIPT_HOME=/home/aw/www/hydro.weekendhack.it/sensoreDataScripts
+cd $SCRIPT_HOME
+
 FILETHP=work/thp.tmp
 FILELUMEN=work/lumen.tmp
-
 TH_JSON=work/th.json
 PRES_JSON=work/pressure.json
 LIGHT_JSON=work/luminocity.json
