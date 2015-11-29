@@ -9,8 +9,8 @@ if (argv.length < 2) {
     process.exit(1);
 }
 
-console.log('Reading '+argv._[0]);
-console.log('Writing '+argv._[1]);
+console.log(new Date().toString() + ', Reading '+argv._[0]);
+console.log(new Date().toString() + ', Writing '+argv._[1]);
 var lr = new LineByLineReader(path.resolve(argv._[0]));
 var luxFile = argv._[1];
 var lData = [];
@@ -36,7 +36,7 @@ lr.on('line', function (line) {
 
 lr.on('end', function () {
     // All lines are read, file is closed now.
-    console.log('Processed '+(currentLine-1)+' lines.');
+    console.log(new Date().toString() + ', Processed '+(currentLine-1)+' lines.');
     fs.writeFile(luxFile, JSON.stringify(lData), function (err) {
         if (err) throw err;
     });

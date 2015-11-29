@@ -9,9 +9,9 @@ if (argv.length < 3) {
     process.exit(1);
 }
 
-console.log('Reading '+argv._[0]);
-console.log('Writing TH '+argv._[1]);
-console.log('Writing press '+argv._[2]);
+console.log(new Date().toString() + ', Reading '+argv._[0]);
+console.log(new Date().toString() + ', Writing TH '+argv._[1]);
+console.log(new Date().toString() + ', Writing press '+argv._[2]);
 var lr = new LineByLineReader(path.resolve(argv._[0]));
 var thFile = argv._[1];
 var pressureFile = argv._[2];
@@ -43,7 +43,7 @@ lr.on('line', function (line) {
 
 lr.on('end', function () {
     // All lines are read, file is closed now.
-    console.log('Processed '+(currentLine-1)+' lines.');
+    console.log(new Date().toString() + ', Processed '+(currentLine-1)+' lines.');
     fs.writeFile(thFile, JSON.stringify([tData, hData]), function (err) {
         if (err) throw err;
     });
