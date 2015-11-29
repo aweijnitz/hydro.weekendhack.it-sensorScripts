@@ -1,0 +1,15 @@
+{
+  "name": "sensorDataToJSON",
+  "version": "0.0.1",
+  "description": "Converts sensor log to JSON files",
+  "main": "convert.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Anders Weijnitz",
+  "license": "MIT",
+  "dependencies": {
+    "line-by-line": "^0.1.4",
+    "minimist": "^1.2.0"
+  }
+}
