@@ -18,10 +18,13 @@ var pressureFile = argv._[2];
 var tData = [];
 var hData = [];
 var pressureData = [];
+// Max 481 lines work. Issue with Metrics.js
+var maxLines = 481;
 
 lr.on('error', function (err) {
     console.err('Something went wrong! '+err);
 });
+
 
 lr.on('line', function (line) {
     // 'line' contains the current line without the trailing newline character.
@@ -43,11 +46,16 @@ lr.on('line', function (line) {
 
 lr.on('end', function () {
     // All lines are read, file is closed now.
-    console.log(new Date().toString() + ', Processed '+(currentLine-1)+' lines.');
-    fs.writeFile(thFile, JSON.stringify([tData, hData]), function (err) {
+    var tMax = tData.length >= maxLines ?  tData.length - maxLines : tData.length;
+    var hMax = hData.length >= maxLines ?  hData.length - maxLines : hData.length;
+    var pMax = pressureData.length >= maxLines ? pressureData.length - maxLines : pressureData.length;
+
+    fs.writeFile(thFile, JSON.stringify([tData.slice(tMax), hData.slice(hMax)]), function (err) {
         if (err) throw err;
     });
-    fs.writeFile(pressureFile, JSON.stringify(pressureData), function (err) {
+    fs.writeFile(pressureFile, JSON.stringify(pressureData.slice(pMax)), function (err) {
         if (err) throw err;
     });
+
+    console.log(new Date().toString() + ', Processed '+(currentLine-1)+' lines. Cut: ' + tMax + ' lines.');
 });
